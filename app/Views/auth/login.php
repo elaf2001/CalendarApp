@@ -8,26 +8,26 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Sign-up</title>
+    <title>Login</title>
   </head>
   <body class="row align-items-center vh-100">
 
     <div class="card col-5 mx-auto" style="width: 18rem;">
         <div class="card-body">
-            <form>
+            <form action="">
                 <div class="form-group">
-                  <label for="inputEmail">Email address</label>
-                  <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="inputEmail">Email address</label>
+                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword">Password</label>
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-                  </div>
-                <a href="<?php echo base_url('createAccount'); ?>" class="btn btn-primary">Sign-up</a>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </div>
+                <br>
+                <a href="<?=site_url('auth/register'); ?>">Create new account</a>
             </form>
         </div>
     </div>
