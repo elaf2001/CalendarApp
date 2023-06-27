@@ -17,6 +17,8 @@
                 center:'title',
             },
             events:"<?php echo base_url('calendar/load'); ?>",
+            displayEventTime: false, 
+            eventTextColor: '#FFFFFF', 
             selectable:true,
             selectHelper:true,
             select:function(start, end, allDay)
@@ -62,9 +64,7 @@
             eventDrop:function(event)
             {
                 var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-                //alert(start);
                 var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-                //alert(end);
                 var title = event.title;
                 var id = event.id;
                 $.ajax({

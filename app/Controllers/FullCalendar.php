@@ -28,16 +28,21 @@ class Fullcalendar extends BaseController {
             $data[] = [
                 'title' => $row['name'],
                 'start' => $row['date'],
-                'end' => $row['date']
+                'end' => $row['date'], 
+                'color' => '#7851a9',
             ];
         }
         
 
         foreach ($eventData as $row) {
             $data[] = [
+                'id' => $row['id'], 
                 'title' => $row['title'],
                 'start' => $row['start_event'],
-                'end' => $row['end_event']
+                'end' => $row['end_event'],
+                'color' => '#4169e1',
+                
+                
             ];
         }
 
@@ -67,7 +72,6 @@ class Fullcalendar extends BaseController {
                 'end_event' => $this->request->getPost('end'),
                 'user_id' => session()->get('loggedUser')
             ];
-
             $this->fullcalendarModel->updateEvent($data, $this->request->getPost('id'));
         }
     }
