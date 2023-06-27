@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jquery FullCalendar Integration with Codeigniter using Ajax</title>
+    <title>My Calendar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -17,7 +17,7 @@
                 center:'title',
                 right:'month'
             },
-            events:"<?php echo base_url(); ?>fullcalendar/load",
+            events:"<?php echo base_url('calendar/load'); ?>",
             selectable:true,
             selectHelper:true,
             select:function(start, end, allDay)
@@ -28,7 +28,7 @@
                     var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
                     var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
                     $.ajax({
-                        url:"<?php echo base_url(); ?>fullcalendar/insert",
+                        url:"<?php echo base_url('calendar/insert'); ?>",
                         type:"POST",
                         data:{title:title, start:start, end:end},
                         success:function()
@@ -50,7 +50,7 @@
                 var id = event.id;
 
                 $.ajax({
-                    url:"<?php echo base_url(); ?>fullcalendar/update",
+                    url:"<?php echo base_url('calendar/update'); ?>",
                     type:"POST",
                     data:{title:title, start:start, end:end, id:id},
                     success:function()
@@ -69,7 +69,7 @@
                 var title = event.title;
                 var id = event.id;
                 $.ajax({
-                    url:"<?php echo base_url(); ?>fullcalendar/update",
+                    url:"<?php echo base_url('calendar/update'); ?>",
                     type:"POST",
                     data:{title:title, start:start, end:end, id:id},
                     success:function()
@@ -85,7 +85,7 @@
                 {
                     var id = event.id;
                     $.ajax({
-                        url:"<?php echo base_url(); ?>fullcalendar/delete",
+                        url:"<?php echo base_url('calendar/delete'); ?>",
                         type:"POST",
                         data:{id:id},
                         success:function()
@@ -102,9 +102,20 @@
     </script>
 </head>
     <body>
-        <br />
-        <h2 align="center">My Calendar</h2>
-        <br />
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="row">
+                <div class="col">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                </div>
+                <div class="col">
+                    <form class="form-inline my-2 my-lg-0" action="<?= base_url('auth/logout'); ?>" method="post">
+                        <button class="btn btn-primary my-2 my-sm-0 ml-auto" type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <br> 
         <div class="container">
             <div id="calendar"></div>
         </div>

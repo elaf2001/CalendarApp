@@ -29,12 +29,17 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Auth::index');
 $routes->get('auth', 'Auth::index');
 $routes->get('auth/register', 'Auth::register');
 $routes->post('auth/createAccount', 'Auth::createAccount');
 $routes->post('auth/authenticate', 'Auth::authenticate');
+$routes->post('auth/logout', 'Auth::logout');
 $routes->get('/calendar', 'FullCalendar::index');
+$routes->post('calendar/delete', 'FullCalendar::delete');
+$routes->post('calendar/update', 'FullCalendar::update');
+$routes->post('calendar/insert', 'FullCalendar::insert');
+$routes->get('calendar/load', 'FullCalendar::load');
 
 /*
  * --------------------------------------------------------------------
