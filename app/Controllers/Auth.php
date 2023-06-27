@@ -87,7 +87,7 @@ class Auth extends BaseController {
                 // store it to the user session 
                 $user_id = $user['id'];
                 session()->set('loggedUser', $user_id); 
-                echo 'slay'; 
+                return redirect()->to('/calendar');
             } else {
                 session()->setFlashdata('fail', 'Incorrect Password');
                 return redirect()->to('/auth')->withInput(); 
