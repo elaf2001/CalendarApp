@@ -14,20 +14,29 @@
 
     <div class="card col-5 mx-auto" style="width: 18rem;">
         <div class="card-body">
-            <form>
+            <form action="<?= base_url('auth/createAccount'); ?>" method="post">
+                <?= csrf_field(); ?>
+                <?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                    <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
+                <?php endif ?>
                 <div class="form-group">
-                  <label for="inputEmail">Email address</label>
-                  <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" value="<?= set_value('email'); ?>" placeholder="Enter email" >
+                    <span class="text-danger"> <?= isset($validation) ?display_error($validation, 'email') : ''?></span>
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword">Password</label>
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password" value="<?= set_value('password'); ?>">
+                    <span class="text-danger"> <?= isset($validation) ?display_error($validation, 'password') : ''?></span>
                 </div>
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-                  </div>
-                <button type="submit" class="btn btn-primary btn-block">Sign-up</a>
+                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" value="<?= set_value('confirmPassword'); ?>">
+                    <span class="text-danger"> <?= isset($validation) ?display_error($validation, 'confirmPassword') : ''?></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Sign-up</a>
+                </div>
             </form>
         </div>
     </div>

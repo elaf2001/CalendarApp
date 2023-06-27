@@ -14,14 +14,24 @@
 
     <div class="card col-5 mx-auto" style="width: 18rem;">
         <div class="card-body">
-            <form action="">
+            <form action="<?= base_url('auth/authenticate'); ?>" method="post">
+                <?= csrf_field(); ?>
+                <?php if(!empty(session()->getFlashdata('success'))) : ?>
+                    <div class="alert alert-success"><?= session()->getFlashdata('success'); ?></div>
+                <?php endif ?>
+
+                <?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                    <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
+                <?php endif ?>
                 <div class="form-group">
-                    <label for="inputEmail">Email address</label>
-                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" value="<?= set_value('email'); ?>" placeholder="Enter email">
+                    <span class="text-danger"> <?= isset($validation) ?display_error($validation, 'email') : ''?></span>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <span class="text-danger"> <?= isset($validation) ?display_error($validation, 'password') : ''?></span>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Login</button>

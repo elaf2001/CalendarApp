@@ -32,6 +32,8 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->get('auth', 'Auth::index');
 $routes->get('auth/register', 'Auth::register');
+$routes->post('auth/createAccount', 'Auth::createAccount');
+$routes->post('auth/authenticate', 'Auth::authenticate');
 
 /*
  * --------------------------------------------------------------------
