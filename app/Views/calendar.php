@@ -15,7 +15,6 @@
             header:{
                 left:'prev,next today',
                 center:'title',
-                right:'month'
             },
             events:"<?php echo base_url('calendar/load'); ?>",
             selectable:true,
@@ -105,7 +104,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="row">
                 <div class="col">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                    <a class="navbar-brand">My Calendar</a>
                 </div>
                 <div class="col">
                     <form class="form-inline my-2 my-lg-0" action="<?= base_url('auth/logout'); ?>" method="post">

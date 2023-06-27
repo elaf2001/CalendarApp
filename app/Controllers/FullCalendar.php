@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controllers; 
+use DateTime;
+use HolidayAPI\Client;
 
 class Fullcalendar extends BaseController {
 
@@ -12,17 +14,27 @@ class Fullcalendar extends BaseController {
 
     function index()
     {
-        return view('calendar');
+        return view('calendar'); 
     }
 
     public function load()
     {
         $eventData = $this->fullcalendarModel->fetchAllEvent();
+        $holidays = $this->getPublicHolidays(); 
+
         $data = [];
+        // add holidays to the data 
+        foreach ($holidays as $row) {
+            $data[] = [
+                'title' => $row['name'],
+                'start' => $row['date'],
+                'end' => $row['date']
+            ];
+        }
+        
 
         foreach ($eventData as $row) {
             $data[] = [
-                'id' => $row['id'],
                 'title' => $row['title'],
                 'start' => $row['start_event'],
                 'end' => $row['end_event']
@@ -65,6 +77,29 @@ class Fullcalendar extends BaseController {
         if ($this->request->getPost('id')) {
             $this->fullcalendarModel->deleteEvent($this->request->getPost('id'));
         }
+    }
+
+    public function getPublicHolidays(){
+
+        // do the request 
+
+        $key = '6be9802d-8d68-4b72-9153-53ad474be04c';
+        $holiday_api = new Client(['key' => $key]);
+
+        //get the current year 
+        $dateString = '2023-06-13 00:00:00';
+        $date = new DateTime($dateString);
+        // should be used instead of 2022, but I am using the free version of the API 
+        $year = $date->format('Y');
+        $response = $holiday_api->holidays([
+            'country' => 'MY',
+            'year' => '2022', 
+            'public' => true
+        ]);
+
+        $holidays = $response['holidays']; 
+        return $holidays; 
+        
     }
 
 }
